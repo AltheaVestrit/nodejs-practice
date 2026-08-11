@@ -1,0 +1,2 @@
+# Anatomy of a HTTP Transaction in NodeJS
+[Here](https://nodejs.org/learn/http/anatomy-of-an-http-transaction) you can find a very basic but solid overview of how an HTTP Transaction works in NodeJS. It shows both the server side and the user side of the transaction.
