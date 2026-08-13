@@ -1,7 +1,7 @@
 // Express is a wrapper for the default node http class. It returns an object based on that http class, with a lot of nice additional features.
 const express = require('express');
-const morgan = require('morgan');
 const mongoose = require('mongoose');
+const Blog = require('./models/blog');
 
 // SETUP
 
@@ -9,48 +9,36 @@ const mongoose = require('mongoose');
 const app = express();
 
 // connect to mongodb
-const dbURI = 'mongodb+srv://netninja:test1234@nodetuts.wgkxdry.mongodb.net/?appName=nodetuts';
+const dbURI = 'mongodb://localhost:27017/nodetuts';
 mongoose.connect(dbURI)
-    .then((result) => { console.log('connected to db') })
+    .then((result) => { app.listen(3001) })
     .catch((err) => console.log(err));
 
 // register view engine
 app.set('view engine', 'ejs');
-// app.set('views', 'myviews'); // set a different location for the views, in case you're not using the default name
 
-// listen for requests
-app.listen(3001);
-
-// MIDDLEWARE
-// app.use((req, res, next) => {
-//     console.log('new request made:');
-//     console.log('host: ', req.hostname);
-//     console.log('path: ', req.path);
-//     console.log('method: ', req.method, '\n');
-//     next();
-// });
-
-// app.use((req, res, next) => {
-//     console.log('in the next middleware');
-//     next();
-// });
-
+//middleware & static files
 app.use(express.static('public'));
-app.use(morgan('dev'));
 
-// REQUEST HANDLERS
+// ROUTES
 app.get('/', (req, res) => {
-    const blogs = [
-        { title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur' },
-        { title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur' },
-        { title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur' }
-    ]
-    res.render('index', { title: 'Home', blogs });
+    res.redirect('/blogs');
 });
 
 app.get('/about', (req, res) => {
     // res.send('<p>About page</p>');
     res.render('about', { title: 'About' });
+});
+
+// Blog routes
+app.get('/blogs', (req, res) => {
+    Blog.find().sort({ createdAt: -1 })
+        .then((result) => {
+            res.render('index', { title: 'All Blogs', blogs: result });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 app.get('/blogs/create', (req, res) => {
