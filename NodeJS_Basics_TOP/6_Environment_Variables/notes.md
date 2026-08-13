@@ -1,0 +1,1 @@
+More information on env variables in Node: https://nodejs.org/docs/latest-v24.x/api/environment_variables.html
