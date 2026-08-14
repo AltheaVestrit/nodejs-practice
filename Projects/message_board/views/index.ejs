@@ -1,0 +1,16 @@
+<html lang="en">
+    <%- include('./partials/head') %>
+    <body>
+        <%- include('./partials/header') %>
+        <div class="container message-list">
+            <% messages.forEach((message, index) => { %>
+                <a href=<%= `/${index}` %> class="message">
+                    <p class="message-text"><%= message.text %></p>
+                    <p class="message-info"><span><%= message.user %></span><span>·</span><span><%= message.added %></span></p>
+                </a>
+            <% }); %>
+        </div>
+
+        <%- include('./partials/footer') %>
+    </body>
+</html>

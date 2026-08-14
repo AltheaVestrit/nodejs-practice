@@ -1,0 +1,17 @@
+<html lang="en">
+    <%- include('./partials/head') %>
+    <body>
+        <%- include('./partials/header') %>
+        <div class="container">
+            <div class="view-message">
+                <h2 class="view-message-header">Message Details</h2>
+                <div class="view-message-content">
+                    <p class="message-text"><%= message.text %></p>
+                    <p class="message-info"><span><%= message.user %></span><span>·</span><span><%= message.added %></span></p>
+                </div>
+            </div>
+        </div>
+
+        <%- include('./partials/footer') %>
+    </body>
+</html>
