@@ -2,7 +2,7 @@
     <%- include('./partials/head') %>
     <body>
         <%- include('./partials/header') %>
-        <div class="container message-list">
+        <div class="container message-list main-content">
             <% messages.forEach((message, index) => { %>
                 <a href=<%= `/${index}` %> class="message">
                     <p class="message-text"><%= message.text %></p>

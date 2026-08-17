@@ -19,6 +19,10 @@ body {
     margin: 0 auto;
 }
 
+.main-content {
+    padding-bottom: 2rem;
+}
+
 .header-content {
     display: flex;
     justify-content: space-between;
@@ -35,6 +39,7 @@ nav ul {
     display: flex;
     gap: 2rem;
     align-items: center;
+    padding: 0;
 }
 
 nav li {
@@ -118,7 +123,7 @@ footer {
 }
 
 .form-field input {
-    width: 40ch;
+    width: 260px;
 }
 
 .form-field textarea {
@@ -158,4 +163,10 @@ form button:hover {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 8px;
     padding: 1rem;
+}
+
+@media (width < 600px) {
+    .header-content {
+        flex-direction: column;
+    }
 }
