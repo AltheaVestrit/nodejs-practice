@@ -1,16 +1,20 @@
 <html lang="en">
-    <%- include('./partials/head') %>
-    <body>
-        <%- include('./partials/header') %>
-        <div class="container message-list main-content">
-            <% messages.forEach((message, index) => { %>
-                <a href=<%= `/${index}` %> class="message">
-                    <p class="message-text"><%= message.text %></p>
-                    <p class="message-info"><span><%= message.user %></span><span>·</span><span><%= message.added %></span></p>
-                </a>
-            <% }); %>
-        </div>
+<%- include('./partials/head') %>
 
-        <%- include('./partials/footer') %>
-    </body>
+<body>
+    <%- include('./partials/header') %>
+    <div class="container message-list main-content">
+        <% messages.forEach((message) => { %>
+        <a href=<%= `/${message.id}` %> class="message">
+            <p class="message-text"><%= message.text %></p>
+            <p class="message-info">
+                <span><%= message.username %></span><span>·</span><span><%= new Date(message.added).toLocaleString() %></span>
+            </p>
+        </a>
+        <% }); %>
+    </div>
+
+    <%- include('./partials/footer') %>
+</body>
+
 </html>

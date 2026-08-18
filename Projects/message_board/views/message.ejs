@@ -1,17 +1,21 @@
 <html lang="en">
-    <%- include('./partials/head') %>
-    <body>
-        <%- include('./partials/header') %>
-        <div class="container main-content">
-            <div class="view-message">
-                <h2 class="view-message-header">Message Details</h2>
-                <div class="view-message-content">
-                    <p class="message-text"><%= message.text %></p>
-                    <p class="message-info"><span><%= message.user %></span><span>·</span><span><%= message.added %></span></p>
-                </div>
+<%- include('./partials/head') %>
+
+<body>
+    <%- include('./partials/header') %>
+    <div class="container main-content">
+        <div class="view-message">
+            <h2 class="view-message-header">Message Details</h2>
+            <div class="view-message-content">
+                <p class="message-text"><%= message.text %></p>
+                <p class="message-info">
+                    <span><%= message.username %></span><span>·</span><span><%= new Date(message.added).toLocaleString() %></span>
+                </p>
             </div>
         </div>
+    </div>
 
-        <%- include('./partials/footer') %>
-    </body>
+    <%- include('./partials/footer') %>
+</body>
+
 </html>
