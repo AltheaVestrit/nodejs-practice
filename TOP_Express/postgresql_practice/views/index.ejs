@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    <h2>Users:</h2>
+
+    <ul>
+        <% if (users.length >= 1) {users.map(user => { %>
+        <li><%= user.username %></li>
+        <%    })} else { %>
+        No users found...
+        <% } %>
+    </ul>
+
+    <a href="/new">Create new user</a>
+
+</body>
+
+</html>
