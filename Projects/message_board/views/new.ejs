@@ -4,16 +4,25 @@
 <body>
     <%- include('./partials/header') %>
     <div class="container main-content">
+
+        <% if(alerts.length > 0) { %>
+        <div class="alerts">
+            <% alerts.forEach(error => { %>
+            <%- include('./partials/alert', { alertmessage: error.msg }) %>
+            <% }); %>
+        </div>
+        <% }; %>
+
         <div class="new-message">
             <h2>New Message</h2>
             <form method="POST" action="/new">
                 <div class="form-field">
                     <label for="username">Name: </label>
-                    <input type="text" name="username" id="username">
+                    <input type="text" name="username" id="username" value=<%= data.username %>>
                 </div>
                 <div class="form-field">
                     <label for="text">Message: </label>
-                    <textarea name="text" id="text"></textarea>
+                    <textarea name="text" id="text"><%= data.text %></textarea>
                 </div>
                 <button>Submit</button>
             </form>
@@ -21,6 +30,22 @@
     </div>
 
     <%- include('./partials/footer') %>
+
+    <script>
+        const alerts = document.querySelectorAll(".alert");
+
+        alerts.forEach(alert => {
+            const closeBtn = alert.querySelector(".close-btn");
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert.classList.add("alert-hidden");
+                })
+            }
+        });
+
+    </script>
+
 </body>
 
 </html>

@@ -1,17 +1,31 @@
 const queries = require('../models/queries');
+const validator = require('../validators/validator');
+const { validationResult } = require('express-validator');
 
 exports.messagesGet = async (req, res) => {
     const messages = await queries.getAllMessages();
     res.render('index', { title: 'Mini Messageboard', messages });
 };
 
-exports.newGet = async (req, res) => {
-    res.render('new', { title: 'New Message' })
+renderNewPage = async (res, alerts = [], data = { username: '', text: '' }) => {
+    res.render('new', {
+        title: 'New Message',
+        alerts,
+        data
+    });
 };
+
+exports.newGet = async (req, res) => {
+    await renderNewPage(res);
+};
+
+exports.newPostFailed = async (res, alerts, data) => {
+    await renderNewPage(res, alerts, data);
+}
 
 exports.newPost = async (req, res) => {
     const newMessage = { text: req.body.text, username: req.body.username, added: new Date() };
-    queries.addMessage(newMessage);
+    await queries.addMessage(newMessage);
     res.redirect('/');
 };
 
