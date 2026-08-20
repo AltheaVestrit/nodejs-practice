@@ -1,7 +1,4 @@
 const queries = require('../models/queries');
-const validator = require('../validators/validator');
-const { validationResult } = require('express-validator');
-
 exports.messagesGet = async (req, res) => {
     const messages = await queries.getAllMessages();
     res.render('index', { title: 'Mini Messageboard', messages });

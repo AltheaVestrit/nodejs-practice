@@ -1,4 +1,4 @@
-const { body, query } = require("express-validator");
+const { body, param } = require("express-validator");
 
 exports.validateNewMessage = [
     body("username")
@@ -12,7 +12,7 @@ exports.validateNewMessage = [
 ];
 
 exports.validateMessageID = [
-    query("id")
+    param("id")
         .isInt()
         .escape()
 ];

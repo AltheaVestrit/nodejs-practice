@@ -22,6 +22,15 @@ indexRouter.post("/new",
 
 indexRouter.get('/:id',
     validator.validateMessageID,
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const error = new Error('Invalid message ID');
+            error.statusCode = 404;
+            return next(error);
+        }
+        next();
+    },
     indexController.singleMessageGet
 );
 
