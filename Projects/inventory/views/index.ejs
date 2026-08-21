@@ -10,7 +10,16 @@
 </head>
 
 <body>
-    Welcome to the home page
+    <div class="container">
+        Welcome to the home page
+        <h2>Books in inventory:</h2>
+        <% books.forEach(book => { %>
+        <p><%= book.title %> - <%= book.author %> - <%= book.genre %></p>
+        <% }); %>
+    </div>
+    <footer>
+        Footer content
+    </footer>
 </body>
 
 </html>

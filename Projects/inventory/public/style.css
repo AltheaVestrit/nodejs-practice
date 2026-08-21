@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    font-size: 1.1rem;
+    font-family: 'Elms Sans', Verdana, sans-serif;
+}
+
 body {
-    color: darkgreen;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    color: rgb(34, 34, 34);
+}
+
+.container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+footer {
+    padding: 1.5rem 0;
+    margin-top: auto;
+    text-align: center;
+    background-color: rgb(32, 32, 32);
+    color: white;
 }
