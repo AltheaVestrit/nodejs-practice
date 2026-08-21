@@ -1,5 +1,5 @@
 const { client } = require('../connect');
-const queries = require('../queries');
+const { populateAuthorsTable, populateBooksTable, populateGenresTable } = require('./db_populate');
 const { authors, genres, books } = require('./db_content');
 
 const SQL = [
@@ -35,10 +35,14 @@ const SQL = [
         genre_id INT,
         CONSTRAINT fk_author
             FOREIGN KEY(author_id)
-                REFERENCES authors(author_id),
+            REFERENCES authors(author_id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
         CONSTRAINT fk_genre
             FOREIGN KEY(genre_id)
-                REFERENCES genres(genre_id)
+            REFERENCES genres(genre_id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
         );
         `
     ],
@@ -65,7 +69,7 @@ async function fireQuery(q) {
     console.log('> Succes');
 };
 
-async function main() {
+async function init() {
     console.log("Initializing database...");
     await client.connect();
     for (const q of SQL) {
@@ -77,15 +81,15 @@ async function main() {
 
 async function populate() {
     console.log("Populating database...");
-    await queries.populateAuthorsTable(authors);
-    await queries.populateGenresTable(genres);
-    await queries.populateBooksTable(books);
+    await populateAuthorsTable(authors);
+    await populateGenresTable(genres);
+    await populateBooksTable(books);
     console.log("Done populating database");
 }
 
-async function init() {
-    await main();
+async function main() {
+    await init();
     await populate();
 };
 
-init();
+main();
