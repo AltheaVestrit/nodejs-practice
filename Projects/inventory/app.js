@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const { getErrorMessage } = require('./utils/utils');
 
 const booksRouter = require('./routers/booksRouter');
+const { CustomError } = require('./utils/customError');
 
 const app = express();
 const port = 3000;
@@ -19,16 +20,21 @@ app.use(morgan("dev"));
 // REQUEST HANDLERS
 app.use("/", booksRouter);
 
-// HANDLE ERRORS
+// ERROR HANDLERS
+// No route matched -> throw 404 error
+app.use((req, res, next) => {
+    const error = new CustomError(`Not Found - ${req.originalUrl}`, 404);
+    next(error);
+});
+
+// Handle all errors
 app.use((err, req, res, next) => {
-    // res.status(err.statusCode || 500).json({
-    //     error: {
-    //         statusCode: err.statusCode || 500,
-    //         message:
-    //             getErrorMessage(err) || "An error occurred. Please view logs for more details",
-    //     },
-    // });
-    res.render('error', { statusCode: err.statusCode || 500, message: getErrorMessage(err) || "An error occurred. Please view logs for more details", title: 'Error' });
+    const statusCode = err.statusCode || 404;
+    res.status(statusCode).render('error', {
+        statusCode: statusCode,
+        message: getErrorMessage(err) || "An error occurred. Please view logs for more details",
+        title: 'Error'
+    });
 })
 
 // START THE SERVER
