@@ -1,4 +1,5 @@
 const { pool } = require("./connect");
+const { CustomError } = require('../utils/customError');
 
 // CREATE
 exports.addAuthor = async (author) => {
@@ -49,22 +50,22 @@ exports.getSingleBook = async (book_id) => {
     return rows;
 };
 
-exports.getBooksWithAuthor = async (author) => {
+exports.getBooksWithAuthor = async (author_id) => {
     const { rows } = await pool.query(`
         SELECT book_id, title, author, genre FROM books 
         JOIN authors ON books.author_id=authors.author_id 
         JOIN genres ON books.genre_id=genres.genre_id
-        WHERE author='${author}'; 
+        WHERE authors.author_id='${author_id}'; 
     `);
     return rows;
 };
 
-exports.getBooksWithGenre = async (genre) => {
+exports.getBooksWithGenre = async (genre_id) => {
     const { rows } = await pool.query(`
         SELECT book_id, title, author, genre FROM books 
         JOIN authors ON books.author_id=authors.author_id 
         JOIN genres ON books.genre_id=genres.genre_id
-        WHERE genre='${genre}'; 
+        WHERE genres.genre_id=${genre_id}; 
     `);
     return rows;
 };
@@ -76,6 +77,19 @@ exports.getAllBooks = async () => {
         JOIN genres ON books.genre_id=genres.genre_id;
         `);
     return rows;
+};
+
+exports.getGenre = async (genre_id) => {
+    const { rows } = await pool.query(`
+        SELECT genre
+        FROM genres
+        WHERE genre_id='${genre_id}';
+    `);
+    if (rows.length > 0) {
+        return rows[0].genre;
+    } else {
+        throw new CustomError('Requested genre does not exist.', 501);
+    }
 };
 
 // UPDATE

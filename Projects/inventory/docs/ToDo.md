@@ -1,0 +1,2 @@
+* Port database interactions to an ORM (Drizzle or Prisma). Drizzle is closest to SQL syntax, so probably Drizzle. Check out Drizzle documentation and Neon documentation of integrating with Drizzle.
+* When calling multiple queries (like in booksController.index), use something like Promise.all to allow for parallel processing.

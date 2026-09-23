@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <title>Home</title>
-</head>
+<%- include('./partials/head') %>
+<%- include('./partials/header') %>
 
 <body>
     <div class="container">
-        Welcome to the home page
         <h2>Books in inventory:</h2>
-        <% books.forEach(book => { %>
+        <h3>Genres</h3>
+        <% Object.keys(genres) != 0 && genres.forEach(genre => { %>
+        <a href="/genre/<%=genre.genre_id%>"><%= genre.genre %></a>
+        <% }); %>
+        <h3>Authors</h3>
+        <% Object.keys(authors) != 0 && authors.forEach(author => { %>
+        <a href="/author/<%=author.author_id%>"><%= author.author %></a>
+        <% }); %>
+        <% Object.keys(books) != 0 && books.forEach(book => { %>
         <p><%= book.title %> - <%= book.author %> - <%= book.genre %></p>
         <% }); %>
     </div>
-    <footer>
-        Footer content
-    </footer>
 </body>
+
+<%- include('./partials/footer') %>
 
 </html>
