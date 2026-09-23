@@ -92,6 +92,19 @@ exports.getGenre = async (genre_id) => {
     }
 };
 
+exports.getAuthor = async (author_id) => {
+    const { rows } = await pool.query(`
+        SELECT author
+        FROM authors
+        WHERE author_id='${author_id}';
+    `);
+    if (rows.length > 0) {
+        return rows[0].author;
+    } else {
+        throw new CustomError('Requested author does not exist.', 501);
+    }
+};
+
 // UPDATE
 exports.updateGenre = async (genre_id, genre) => {
     await pool.query(`

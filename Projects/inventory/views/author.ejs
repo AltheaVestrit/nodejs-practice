@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+<%- include('./partials/header') %>
+
+<body>
+    <div class="container">
+        <% Object.keys(books).length != 0 && books.forEach(book => { %>
+        <p><%= book.title %> - <%= book.author %> - <%= book.genre %></p>
+        <% }); %>
+    </div>
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>
