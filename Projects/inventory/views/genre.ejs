@@ -6,6 +6,7 @@
 
 <body>
     <div class="container">
+        <h3>Books</h3>
         <% Object.keys(books).length != 0 && books.forEach(book => { %>
         <p><%= book.title %> - <%= book.author %> - <%= book.genre %></p>
         <% }); %>

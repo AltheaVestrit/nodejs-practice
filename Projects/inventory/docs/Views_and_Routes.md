@@ -22,7 +22,7 @@ Home page
 ## Add Router
 Methods:
 - Get -> render view
-- Post -> add new book/genre/author, then redirect to home (all books) / all genres / all authors
+- Post -> add new book/genre/author, then redirect to home (all books / all genres / all authors)
 
 ### `/add/book`
 - Form for adding a new book.

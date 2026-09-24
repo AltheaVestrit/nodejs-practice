@@ -1,3 +1,19 @@
 <nav>
     <a href="/">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Genres</button>
+        <div class="dropdown-content">
+            <% Object.keys(genres) != 0 && genres.forEach(genre => { %>
+            <a href="/genre/<%=genre.genre_id%>"><%= genre.genre %></a>
+            <% }); %>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">Authors</button>
+        <div class="dropdown-content">
+            <% Object.keys(authors) != 0 && authors.forEach(author => { %>
+            <a href="/author/<%=author.author_id%>"><%= author.author %></a>
+            <% }); %>
+        </div>
+    </div>
 </nav>
